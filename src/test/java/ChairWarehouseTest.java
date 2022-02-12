@@ -27,4 +27,5 @@ public class ChairWarehouseTest {
         Thread.sleep(200);
         assertEquals(7, ChairWarehouse.getInstance().getCurrentStockQuantity());
     }
+
 }

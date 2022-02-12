@@ -4,6 +4,7 @@ public class ChairWarehouse {
     private static volatile ChairWarehouse instance;
     private int numberOfChairsLeft;
 
+
     private ChairWarehouse() {
     }
 

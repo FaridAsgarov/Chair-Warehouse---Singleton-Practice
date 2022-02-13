@@ -1,9 +1,7 @@
-package com.company;
+package com.asgarov;
 
 public class ChairWarehouse {
-    private static ChairWarehouse instance = new ChairWarehouse();
-    private static Object key = new Object();
-
+    private static volatile ChairWarehouse instance;
     private int numberOfChairsLeft;
 
     private ChairWarehouse() {
@@ -21,13 +19,17 @@ public class ChairWarehouse {
             numberOfChairsLeft += numberOfChairsToBeSold;
         }
         numberOfChairsLeft -= numberOfChairsToBeSold;
-        System.out.println("Sold " + numberOfChairsToBeSold + " chair to the client!");
+        System.out.println("Sold " + numberOfChairsToBeSold + " chairs to the client!");
+    }
+
+    public synchronized int getCurrentStockQuantity() {
+        return ChairWarehouse.getInstance().numberOfChairsLeft;
     }
 
 
     public static ChairWarehouse getInstance() {
         if (instance == null) {
-            synchronized (key) {
+            synchronized (ChairWarehouse.class) {
                 if (instance == null) {
                     System.out.println("Chair Warehouse created!!!");
                     instance = new ChairWarehouse();
